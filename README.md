@@ -15,7 +15,13 @@
      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/326d9c61-555c-4d52-b830-a4095718973c)
      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/6b1cb840-aed8-4b91-8414-b2bcf21ba87c)
 
-4. 
+3. IntelliJ - Ctrl + Shift + A -> show memory indicator
+   힙 메모리 영역의 용량 확인 가능
+   ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/f0716730-74d8-4263-9b61-54cb5b0f9224)
+   ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/763c3436-d9b6-426f-bfc4-d6df405eba36)
+
+   
+5. 
  
  ## 2. 데이터베이스 인덱스
      - DB성능의 핵심은 디스크I/O(접근)을 최소화!
