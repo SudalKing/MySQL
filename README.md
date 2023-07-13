@@ -1,6 +1,17 @@
 ## 1. 실습 내용
 
-1. 
+1. Join을 최대한 미루며 관계 생성
+2. MySQL의 bulkInsert 기능 사용
+   - bulkInsert 사용x
+      Insert query 여러 개 생성
+     ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/74a0a582-0746-4bac-a43a-75411d02684a)
+
+   - bulkInsert 사용
+      Inser query 한 개로 여러 개의 데이터 삽입
+     ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/326d9c61-555c-4d52-b830-a4095718973c)
+     ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/6b1cb840-aed8-4b91-8414-b2bcf21ba87c)
+
+3. 
  
  ## 2. 데이터베이스 인덱스
      - DB성능의 핵심은 디스크I/O(접근)을 최소화!
