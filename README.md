@@ -24,6 +24,8 @@
 4. 힙 메모리 영역 용량 조절
       ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/c5d29da9-d95a-42c8-8c2c-46c6d1d05325)
       ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/90040083-f740-4ee8-9771-913bbdb5e1ec)
+      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/4fb883e9-6e64-4d2a-a43d-69187375d613)
+      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/4bb74e8a-752f-4a96-8fc6-6c10143b3b86)
 
 6. asd
 7.  
