@@ -27,8 +27,21 @@
       ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/4fb883e9-6e64-4d2a-a43d-69187375d613)
       ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/4bb74e8a-752f-4a96-8fc6-6c10143b3b86)
 
-6. asd
-7.  
+5. SQL explain 명령어
+   <br>
+   항상 explain을 사용하여 index가 어떻게 적용하는지 보는 습관이 중요!!
+   <br>
+      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/1e9329b2-1f7f-4af5-b478-1e0f9f7cb476)
+   <br>
+   - Index 적용 전
+      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/45e3e2cb-3669-4a4a-ad46-2c051c7b6696)
+
+   - Index 적용 후
+      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/1d8854c0-9b29-431d-84e7-311f83bd3532)
+
+
+7. 
+8.  
  
  ## 2. 데이터베이스 인덱스
      - DB성능의 핵심은 디스크I/O(접근)을 최소화!
