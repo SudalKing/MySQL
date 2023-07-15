@@ -33,12 +33,6 @@
    <br>
       ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/1e9329b2-1f7f-4af5-b478-1e0f9f7cb476)
    <br>
-   - Index 적용 전
-      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/45e3e2cb-3669-4a4a-ad46-2c051c7b6696)
-
-   - Index 적용 후
-      ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/1d8854c0-9b29-431d-84e7-311f83bd3532)
-
 
 7. 
 8.  
@@ -57,7 +51,8 @@
            2) List - 정렬되지 않은 리스트의 탐색 O(N), 정렬된 리스트 O(logN), 정렬 시간 O(N) ~ O(N*logN), 삽입/삭제 비용이 매우 높음<br>
            3) Tree - 트리 높이에 따라 시간 복잡도 결정 => 트리의 높이 최소화<br>
              - B+ Tree - 삽입/삭제 균형, 한 노드에 여러 개의 자식 노드, 리프노드에만 데이터 존재(연속적인 데이터 접근 시 유리)
-
+     4. 항상 explain으로 확인하는 습관, 인덱스도 비용(쓰기를 희생하고 조회를 얻음), 꼭 인덱스로만 해결해야 하나?
+      
 ### 2-1. 클러스터 인덱스★★★
       - PK를 활용한 검색이 빠름, 특히 범위 검색
       - 세컨더리 인덱스들이 PK를 가지고 있어 커버링에 유리★
