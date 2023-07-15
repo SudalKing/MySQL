@@ -34,8 +34,6 @@
       ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/1e9329b2-1f7f-4af5-b478-1e0f9f7cb476)
    <br>
 
-7. 
-8.  
  
  ## 2. 데이터베이스 인덱스
      - DB성능의 핵심은 디스크I/O(접근)을 최소화!
