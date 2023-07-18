@@ -1,11 +1,10 @@
 package com.example.fastcampusmysql.domain.post.repository;
 
-import com.example.fastcampusmysql.domain.PageHelper;
+import com.example.fastcampusmysql.util.PageHelper;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCount;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCountRequest;
 import com.example.fastcampusmysql.domain.post.entity.Post;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.*;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -83,6 +82,43 @@ public class PostRepository {
         var params = new MapSqlParameterSource()
                 .addValue("memberId", memberId);
         return namedParameterJdbcTemplate.queryForObject(sql, params, Long.class);
+    }
+
+    /**
+     * cursor 방식에서는 데이터의 정렬이 cursor key로 이루어져야 함
+     * @param memberId
+     * @param size
+     * @return
+     */
+    public List<Post> findAllByMemberIdAndOrderByIdDesc(Long memberId, int size){
+        var sql = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId = :memberId
+                ORDER BY id desc 
+                LIMIT :size
+                """, TABLE);
+        var param = new MapSqlParameterSource()
+                .addValue("memberId", memberId)
+                .addValue("size", size);
+
+        return namedParameterJdbcTemplate.query(sql, param, ROW_MAPPER);
+    }
+
+    public List<Post> findAllByLessThanIdAndMemberIdAndOrderByIdDesc(Long id, Long memberId, int size){
+        var sql = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId = :memberId and id < :id
+                ORDER BY id desc
+                LIMIT :size
+                """, TABLE);
+        var param = new MapSqlParameterSource()
+                .addValue("memberId", memberId)
+                .addValue("id", id)
+                .addValue("size", size);
+
+        return namedParameterJdbcTemplate.query(sql, param, ROW_MAPPER);
     }
 
     public Post save(Post post){
