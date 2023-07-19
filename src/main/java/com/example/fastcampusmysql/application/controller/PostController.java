@@ -1,5 +1,6 @@
 package com.example.fastcampusmysql.application.controller;
 
+import com.example.fastcampusmysql.application.usecase.CreatePostUseCase;
 import com.example.fastcampusmysql.application.usecase.GetTimelinePostUseCase;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCount;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCountRequest;
@@ -11,7 +12,6 @@ import com.example.fastcampusmysql.util.CursorRequest;
 import com.example.fastcampusmysql.util.PageCursor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +25,11 @@ public class PostController {
     private final PostWriteService postWriteService;
     private final PostReadService postReadService;
     private final GetTimelinePostUseCase getTimelinePostUseCase;
+    private final CreatePostUseCase createPostUseCase;
 
     @PostMapping("")
     public Long create(PostCommand postCommand){
-        return postWriteService.create(postCommand);
+        return createPostUseCase.execute(postCommand);
     }
 
     @GetMapping("/daily-post-counts")
@@ -57,7 +58,7 @@ public class PostController {
             @PathVariable Long memberId,
             CursorRequest cursorRequest
     ) {
-        return getTimelinePostUseCase.execute(memberId, cursorRequest);
+        return getTimelinePostUseCase.executeByTimeline(memberId, cursorRequest);
     }
 
 }

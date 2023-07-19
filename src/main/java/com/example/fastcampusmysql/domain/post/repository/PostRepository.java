@@ -27,14 +27,14 @@ public class PostRepository {
 
     final static private String TABLE = "Post";
 
-    private final static RowMapper<DailyPostCount> DAILY_POST_COUNT_MAPPER = (ResultSet resultSet, int rowNum) ->
+    private static final RowMapper<DailyPostCount> DAILY_POST_COUNT_MAPPER = (ResultSet resultSet, int rowNum) ->
             new DailyPostCount(
                     resultSet.getLong("memberId"),
                     resultSet.getObject("createdDate", LocalDate.class),
                     resultSet.getLong("count")
             );
 
-    private final static RowMapper<Post> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> Post.builder()
+    private static final RowMapper<Post> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> Post.builder()
             .id(resultSet.getLong("id"))
             .memberId(resultSet.getLong("memberId"))
             .contents(resultSet.getString("contents"))
@@ -82,6 +82,20 @@ public class PostRepository {
         var params = new MapSqlParameterSource()
                 .addValue("memberId", memberId);
         return namedParameterJdbcTemplate.queryForObject(sql, params, Long.class);
+    }
+
+    public List<Post> findAllByInId(List<Long> ids){
+        if(ids.isEmpty()) return List.of();
+
+        var sql = String.format("""
+                SELECT *
+                FROM %s
+                WHERE id in (:ids)
+                """, TABLE);
+        var param = new MapSqlParameterSource()
+                .addValue("ids", ids);
+
+        return namedParameterJdbcTemplate.query(sql, param, ROW_MAPPER);
     }
 
     /**
