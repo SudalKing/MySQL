@@ -121,6 +121,47 @@ public class PostRepository {
         return namedParameterJdbcTemplate.query(sql, param, ROW_MAPPER);
     }
 
+
+    public List<Post> findAllByInMemberIdAndOrderByIdDesc(List<Long> memberIds, int size){
+        if(memberIds.isEmpty()){
+            return List.of();
+        }
+
+        var sql = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId in (:memberIds)
+                ORDER BY id desc
+                LIMIT :size
+                """, TABLE);
+
+        var param = new MapSqlParameterSource()
+                .addValue("memberIds", memberIds)
+                .addValue("size", size);
+
+        return namedParameterJdbcTemplate.query(sql, param, ROW_MAPPER);
+    }
+
+    public List<Post> findAllByLessThanIdAndInMemberIdAndOrderByIdDesc(Long id, List<Long> memberIds, int size){
+        if(memberIds.isEmpty()){
+            return List.of();
+        }
+
+        var sql = String.format("""
+                SELECT *
+                FROM %s
+                WHERE memberId in (:memberIds) and id < :id
+                ORDER BY id desc
+                LIMIT :size
+                """, TABLE);
+        var param = new MapSqlParameterSource()
+                .addValue("memberIds", memberIds)
+                .addValue("id", id)
+                .addValue("size", size);
+
+        return namedParameterJdbcTemplate.query(sql, param, ROW_MAPPER);
+    }
+
     public Post save(Post post){
         if(post.getId() == null) return insert(post);
 
