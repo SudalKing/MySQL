@@ -4,11 +4,21 @@
 - DB에서 동시성 이슈가 발생하는 일반적인 패턴
   1. 공유자원 조회
   2. 공유자원 갱신
+
+- 동시성 테스트: 디버그 모드에서 우클릭
+  ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/1f97d89d-ce1d-4bee-80c0-10998a787d46)
+
       
 ## 2. 락
 - 락을 통해 동시성을 제어할 때는 락의 범위를 최소화 하는 것이 중요
 - MySQL에서 트랙잭션의 커밋 혹은 롤백시점에 잠금이 풀림 -> 트랜잭션이 곧 락의 범위
 - MySQL은 쓰기락, 읽기락 모두 제공
+
+  ### 2-1. 비관적 락
+  - 동시성 제어를 위한 가장 보편적인 방법은 락을 통한 줄세우기 -> 비관적 락
+  - 실패가 없기에 충돌처리가 없음
+  - 락을 통한 동시성 제어는 불필요한 대기 상태를 만듦
+  - 동시성이 빈번하지 않은 쿼리마저도 대기해버린다면?
   <br><br>
   |잠금|읽기락(Shared Lock)|쓰기락(Exclusive Lock)|
    |:---:|:---:|:---:|
@@ -26,6 +36,11 @@
       ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/db92a89d-706c-4c86-a1af-05be188cb0a1)
       ![image](https://github.com/SudalKing/Spring-MySQL/assets/87001865/fbe84205-cb47-4f85-b649-cd9159d058f8)
 
+
+  ### 2-2. 낙관적 락
+  - CAS(Compare And Set)을 통해 제어(비교해서 맞으면 하고 아니면 안하겠다!)
+  - version 필드 추가(version을 통해 비교)
+  - 실패에 대한 처리를 직접 구현해야함
 
 
 ## 3. 추가로 공부해볼만한 키워드
