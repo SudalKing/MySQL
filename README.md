@@ -20,10 +20,12 @@
   - 락을 통한 동시성 제어는 불필요한 대기 상태를 만듦
   - 동시성이 빈번하지 않은 쿼리마저도 대기해버린다면?
   <br><br>
+  
   |잠금|읽기락(Shared Lock)|쓰기락(Exclusive Lock)|
    |:---:|:---:|:---:|
    |읽기락(Shared Lock)|O|대기|
    |쓰기락(Exclusive Lock)|대기|대기|
+  
    <br><br>
 - 읽기락: SELECT ... FOR SHARE
 - 쓰기락: SELECT ... FOR UPDATE 또는 UPDATE, DELETE 쿼리
