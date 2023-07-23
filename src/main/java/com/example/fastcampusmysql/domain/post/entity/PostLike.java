@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
-public class Timeline {
+public class PostLike {
 
     private final Long id;
     private final Long memberId;
@@ -15,7 +15,7 @@ public class Timeline {
     private final LocalDateTime createdAt;
 
     @Builder
-    public Timeline(Long id, Long memberId, Long postId, LocalDateTime createdAt) {
+    public PostLike(Long id, Long memberId, Long postId, LocalDateTime createdAt) {
         this.id = id;
         this.memberId = Objects.requireNonNull(memberId);
         this.postId = Objects.requireNonNull(postId);

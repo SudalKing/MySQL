@@ -1,8 +1,10 @@
 package com.example.fastcampusmysql.domain.post.service;
 
+import com.example.fastcampusmysql.domain.member.dto.PostDto;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCount;
 import com.example.fastcampusmysql.domain.post.dto.DailyPostCountRequest;
 import com.example.fastcampusmysql.domain.post.entity.Post;
+import com.example.fastcampusmysql.domain.post.repository.PostLikeRepository;
 import com.example.fastcampusmysql.domain.post.repository.PostRepository;
 import com.example.fastcampusmysql.util.CursorRequest;
 import com.example.fastcampusmysql.util.PageCursor;
@@ -18,6 +20,7 @@ import java.util.List;
 public class PostReadService {
 
     private final PostRepository postRepository;
+    private final PostLikeRepository postLikeRepository;
 
     public List<DailyPostCount>getDailyPostCount(DailyPostCountRequest dailyPostCountRequest){
         return postRepository.groupByCreatedDate(dailyPostCountRequest);
@@ -29,8 +32,26 @@ public class PostReadService {
      * @param pageRequest
      * @return
      */
-    public Page<Post> getPosts(Long memberId, Pageable pageRequest){
-        return postRepository.findAllByMemberId(memberId, pageRequest);
+    public Page<PostDto> getPosts(Long memberId, Pageable pageRequest){
+        return postRepository.findAllByMemberId(memberId, pageRequest).map(this::toDto);
+    }
+
+    /**
+     * 스케쥴러를 통해 몰아서 처리하는 구성 가능
+     * @param post
+     * @return
+     */
+    private PostDto toDto(Post post){
+        return new PostDto(
+          post.getId(),
+          post.getContents(),
+          post.getCreatedAt(),
+          postLikeRepository.count(post.getId())// query가 계속 나가기때문에 읽기 성능을 희생하고 조회를 얻음
+        );
+    }
+
+    public Post getPost(Long postId){
+        return postRepository.findById(postId, false).orElseThrow();
     }
 
     /**
